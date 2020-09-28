@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/product.css' %}" >{% endblock css %}
+{% block title %}Product page {% endblock title %}
+{% block body %}
+<div class="container-fluid">
+    <div class="card card-body">
+        <h5>Products</h5>
+
+    </div>
+    <div class="card card-body">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                </tr>
+                {% for product in product_details %}
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.category}}</td>
+                    <td><strong>$</strong>{{product.price}}</td>
+                </tr>
+                {% endfor %}
+                
+              
+
+            </tbody>
+        </table>
+        
+    </div>
+    {% if prev %}
+
+        <div class=""> <a class="text-dark ml-2 " style="text-decoration: none;" href="/products?page={{prev}}" > &larr; Previous</a> </div> 
+         
+        {% else %}
+
+        <div class=""> <a class="text-dark ml-2 " style="text-decoration: none;" href="#" > &larr; Previous</a> </div> 
+
+        {% endif %} 
+        
+        
+        {% if nxt %}
+
+        <div class=""> <a class="text-dark float-right" style="text-decoration: none;" href="/products?page={{nxt}}" >Next &rarr;</a> </div> 
+
+        {% else %}
+
+        <div class=""> <a class="text-dark float-right" style="text-decoration: none;" href="#" >Next &rarr;</a> </div> 
+
+        {% endif %}
+           
+</div>
+{% endblock body %}

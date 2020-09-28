@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/product.css' %}" >{% endblock css %}
+{% block title %}Customer Page {% endblock title %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card-body card">
+                <h5 class="card-title text-center text-dark text-size">Customer:</h5>
+                <hr>
+                <a class="btn btn-sm btn-outline-info text-info text-center mt-1" href="{% url 'update_customer' customer_details.id %}">Update Customer</a>
+                <a class="btn btn-sm btn-outline-info text-info text-center mt-2" href="{% url 'create_order' customer_details.id %}">Place Order</a>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="card-body card">
+                <h5 class="card-title text-center text-dark text-size">Contact Info:</h5>
+                <hr>
+                <h6 class="mt-3"style="font-size:0.9rem">Email:{{customer_details.email}}</h6>
+                <h6 class="mt-2" style="font-size:0.9rem">Phone:{{customer_details.phone}}</h6>
+            </div>
+            
+        </div>
+        <div class="col-md-4">
+            <div class="card-body card">
+                <h5 class="card-title text-center text-dark text-size">Total Orders</h5>
+                <hr>
+                <h4 class="text-center pt-3 " style="font-size:2.5rem">{{total_order}}</h4>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row my-4">
+        <div class="col-md-12 ">
+            <div class="card-body card">
+                <form method="get">
+                  {{myFilter.form}}
+                    
+                    
+
+                    
+                   
+                    
+                    <!-- <label for="id_start_date ">Start Date:</label> 
+                    <input id="id_start_date" type="text" class="form-control mr-2" name="start_date" style="width: 150px; display: inline-block;">       
+                    
+                    
+
+                    <label for="id_end_date">End Date:</label> 
+                    <input id="id_end_date" type="text" class="form-control" name="end_date" style="width: 150px; display: inline-block;">                -->
+
+                    <button class="btn btn-primary text-light float-right" type="submit" style="width:5rem ">Search</button>
+               
+
+            </div>
+            
+        </div>
+    </div>
+    <div class="row my-4">
+        <div class="col-md-12">
+            <div class="card-body card">
+                <table class="table table-sm">
+                    <tbody>
+                        <tr>
+                            <th>Product</th>
+                            <th>Note</th>
+                            <th>Date Ordered</th>
+                            <th>Status</th>
+                            <th>Update</th>
+                            <th>Remove</th>
+                        </tr>
+                        {% for order in order_info %}
+                        <tr>
+                            <td>{{order.product.name}}</td>
+                            <td>{{order.note}}</td>
+                            <td>{{order.date_created}}</td>
+                            <td>{{order.status}}</td>
+                            <td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+                            <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+                        </tr>
+
+                        {% endfor %}
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> 
+{% endblock body %}

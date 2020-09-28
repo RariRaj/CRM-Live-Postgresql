@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/product.css' %}" >{% endblock css %}
+{% block title %}Customer Page {% endblock title %}
+{% block body %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="SUBMIT">
+                    
+</form>                   
+{% endblock body %}

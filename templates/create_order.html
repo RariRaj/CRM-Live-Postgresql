@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/home.css' %}" >{% endblock css %}
+{% block title %}Create Order Page {% endblock title %}
+{% block body %}
+<div class="container ml-0 my-3">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {% for form in formset %}
+            {{form}}
+            <hr>
+        {% endfor %}
+        
+        <input type="submit"  value="Submit" class="mb-4">
+    </form>
+    
+
+</div>
+
+{% endblock body %}
