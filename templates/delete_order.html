@@ -5,7 +5,6 @@
 {% block body %}
 <div class="bg-light pb-2" style="width:450px;" >
     <form action="" method="POST">
-    
         {% csrf_token %}
     <p>Are you sure? You want to delete <strong>{{item.product.name}}</strong>?</p>
     <br>

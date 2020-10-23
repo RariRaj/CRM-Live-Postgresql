@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/home.css' %}" >{% endblock css %}
+
+{% block body %}
+<div class="container-fluid">
+    {% include 'status.html' %}
+    <br>
+    <div class="row">
+        <div class="col-md">
+          
+            <div class="card-body card">
+              <br>
+              
+             
+              <table class="table table-sm mt-2">
+                <tbody> 
+                  <tr>
+                    <th>Product </th>
+                    <th>Note</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                    
+                  </tr>
+                  {% for order in orders %}
+                  <tr>
+                    <td>{{order.product.name}}</td>
+                    <td>{{order.note}}</td>
+                    <td>{{order.date_created}}</td>
+                    <td>{{order.status}}</td>
+                    
+                  </tr>
+                  
+                  {% endfor %}
+                  
+                  <!-- <tr>
+                    <td>BBQ Grill</td>
+                    <td>Dec. 13, 2019, 5:45 p.m.</td>
+                    <td>Pending</td>
+                    <td><a class="btn btn-info btn-sm text-light" href="">Update</a></td>
+                    <td><a class="btn btn-danger btn-sm text-light" href="">Delete</a></td>
+                  </tr>
+                  <tr>
+                    <td>Dishes</td>
+                    <td>Dec. 13, 2019, 6:14 p.m.</td>
+                    <td>Out for delivery</td>
+                    <td><a class="btn btn-info btn-sm text-light" href="">Update</a></td>
+                    <td><a class="btn btn-danger btn-sm text-light" href="">Delete</a></td>
+                  </tr>
+                  <tr>
+                    <td>BBQ Grill</td>
+                    <td>Dec. 16, 2019, 11 p.m.</td>
+                    <td>Out for delivery</td>
+                    <td><a class="btn btn-info btn-sm text-light" href="">Update</a></td>
+                    <td><a class="btn btn-danger btn-sm text-light" href="">Delete</a></td>
+                  </tr> -->
+                 </tbody>
+                
+              </table>
+
+             
+           </div> 
+            
+        </div>
+        
+
+    </div>  
+
+</div>
+
+{% endblock body %}
