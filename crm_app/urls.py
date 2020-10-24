@@ -15,8 +15,8 @@ urlpatterns = [
     path('update_customer/<str:id>',views.updateCustomer,name="update_customer"),
     path('create_customer',views.createCustomer,name="create_customer"),
     path('registration',views.registration,name="registration"),
-    path('login',views.loginPage,name="login"),
-    path('logout',views.logoutUser,name="logout"),
+    path('loginuser',views.loginPage,name="loginuser"),
+    path('logoutuser',views.logoutUser,name="logoutuser"),
     path('userhome',views.userHome,name="userhome"),
     path('settings',views.userSettings,name="settings"),
 

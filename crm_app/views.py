@@ -28,7 +28,7 @@ def registration(request):
             
             
             messages.success(request,'Account is created for'+ " "+username)
-            return redirect('/login')
+            return redirect('/loginuser')
         else:
             print("error")
 
@@ -57,14 +57,14 @@ def loginPage(request):
         else:
             messages.info(request,'Username or Password is incorrect')
 
-    return render(request,'login.html')
+    return render(request,'loginuser.html')
 
 def logoutUser(request):
     logout(request)
-    return redirect('login')
+    return redirect('loginuser')
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @admin_only
 def home(request):
     customer_details=Customer.objects.all()
@@ -80,7 +80,7 @@ def home(request):
     return render(request,'home.html',context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @admin_only
 def products(request):
     no_of_blocks=4
@@ -112,10 +112,11 @@ def products(request):
     return render(request,'products.html',context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @admin_only
 def customer(request,id):
     customer_details=Customer.objects.get(pk=id)
+    
     order_info=customer_details.order_set.all()
     #print(order_info)
     total_order=order_info.count()
@@ -126,7 +127,7 @@ def customer(request,id):
     return render(request,'customer.html',context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @admin_only
 def createOrder(request,id):
     OrderFormSet=inlineformset_factory(Customer,Order,fields=('product','status'), extra=10)
@@ -145,7 +146,7 @@ def createOrder(request,id):
     return render(request,'create_order.html',context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @admin_only
 def updateOrder(request,id):
     order=Order.objects.get(pk=id)
@@ -160,7 +161,7 @@ def updateOrder(request,id):
     return render(request,'update_order.html',context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @admin_only
 def deleteOrder(request,id):
     order_item=Order.objects.get(pk=id)
@@ -173,7 +174,7 @@ def deleteOrder(request,id):
     return render(request,'delete_order.html',context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @admin_only
 def updateCustomer(request,id):
     customer=Customer.objects.get(pk=id)
@@ -188,7 +189,7 @@ def updateCustomer(request,id):
     return render(request,'update_customer.html',context) 
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @admin_only
 def createCustomer(request):
     form=CustomerForm()
@@ -202,7 +203,7 @@ def createCustomer(request):
     return render(request,'create_customer.html',context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @allowed_users(allowed_roles=['customer'])
 def userHome(request):
     orders=request.user.customer.order_set.all()
@@ -214,7 +215,7 @@ def userHome(request):
     return render(request,'users.html',context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/loginuser')
 @allowed_users(allowed_roles=['customer'])
 def userSettings(request):
     customer=request.user.customer
